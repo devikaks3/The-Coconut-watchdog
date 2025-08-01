@@ -35,7 +35,14 @@ function generateAlert() {
   const time = times[Math.floor(Math.random() * times.length)];
   const warning = warnings[Math.floor(Math.random() * warnings.length)];
 
-  document.getElementById("alert-box").innerText =
-   `⚠ Coconut expected to fall at **${location}** ${time}. ${warning}`;
+  document.getElementById("alert-box").innerHTML =
+    `⚠ Coconut expected to fall at <strong>${location}</strong> ${time}. ${warning}`;
 
+  const audio = document.getElementById("fallSound");
+  if (audio) {
+    audio.currentTime = 0; // rewind sound
+    audio.play().catch(error => {
+      console.warn("Audio playback failed:", error);
+    });
+  }
 }
