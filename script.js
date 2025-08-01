@@ -36,5 +36,6 @@ function generateAlert() {
   const warning = warnings[Math.floor(Math.random() * warnings.length)];
 
   document.getElementById("alert-box").innerText =
-   "⚠ Coconut expected to fall at **${location}** ${time}. ${warning}";
+   `⚠ Coconut expected to fall at **${location}** ${time}. ${warning}`;
+
 }
