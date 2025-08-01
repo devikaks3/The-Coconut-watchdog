@@ -46,3 +46,39 @@ function generateAlert() {
     });
   }
 }
+function playCoconutVideo() {
+  const video = document.getElementById("coconutVideo");
+  const container = document.getElementById("video-container");
+
+  if (video && container) {
+    container.style.display = "block";
+    video.currentTime = 0;
+    video.play().catch(err => console.warn("Video play failed:", err));
+
+    // Hide video after playback (or setTimeout if looping)
+    video.onended = () => {
+      container.style.display = "none";
+    };
+  }
+}
+playCoconutVideo();
+function generateAlert() {
+  const location = locations[Math.floor(Math.random() * locations.length)];
+  const time = times[Math.floor(Math.random() * times.length)];
+  const warning = warnings[Math.floor(Math.random() * warnings.length)];
+
+  document.getElementById("alert-box").innerHTML =
+    `⚠ Coconut fell at <strong>${location}</strong> ${time}. ${warning}`;
+
+  const audio = document.getElementById("fallSound");
+  if (audio) {
+    audio.currentTime = 0;
+    audio.play().catch(err => console.warn("Audio play failed:", err));
+  }
+
+  // Show video
+  playCoconutVideo();
+
+  // Optional: trigger falling coconut image too
+  triggerCoconutFall();
+}
